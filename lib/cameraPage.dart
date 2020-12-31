@@ -8,6 +8,8 @@
 */
 
 //TODO rename this to disclaimer page
+import 'dart:ui';
+
 import 'package:exerciseGifLab/Models/models.dart';
 import 'package:exerciseGifLab/Views/views.dart';
 import 'package:exerciseGifLab/Controllers/controllers.dart';
@@ -136,6 +138,38 @@ class _CameraPageState extends State<CameraPage> {
 
   }
 
+  Widget _buildBlur() {
+    return BackdropFilter(
+      filter: ImageFilter.blur(sigmaX: 10, sigmaY: 10), //up to 10
+      child: Container(color: CKHColors.secondary.withAlpha(200),),
+    );
+  }
+
+  Widget _buildBlurCamera(){
+    return BlocBuilder(
+      cubit: _cameraReadyBloc,
+      builder: (context, isReady) {
+        if(!isReady) return Container(color: CKHColors.main,);
+
+        double deviceRatio = _screenWidth / _screenHeight;
+
+        return Center(
+          child: Transform.scale(
+            scale: _controller.value.aspectRatio / deviceRatio,
+            child: Center(
+              child: AspectRatio(
+                aspectRatio: _controller.value.aspectRatio,
+                child: CameraPreview(
+                  _controller
+                ),
+              ),
+            )
+          ),
+        );
+      }
+    );
+  }
+
   Widget _buildOverlay() {
     return ColorFiltered(
       colorFilter: ColorFilter.mode(
@@ -171,19 +205,14 @@ class _CameraPageState extends State<CameraPage> {
       builder: (context, isReady) {
         if(!isReady) return Container(color: CKHColors.main,);
 
-        double deviceRatio = _screenWidth / _screenHeight;
-
         return Center(
-          child: Transform.scale(
-            scale: _controller.value.aspectRatio / deviceRatio,
-            child: Center(
-              child: AspectRatio(
-                aspectRatio: _controller.value.aspectRatio,
-                child: CameraPreview(
-                  _controller
-                ),
+          child: Center(
+            child: AspectRatio(
+              aspectRatio: _controller.value.aspectRatio,
+              child: CameraPreview(
+                _controller
               ),
-            )
+            ),
           ),
         );
       }
@@ -245,6 +274,8 @@ class _CameraPageState extends State<CameraPage> {
     return Scaffold(
       body: Stack(
         children: [
+          _buildBlurCamera(),
+          _buildBlur(),
           _buildCamera(),
           _buildOverlay(),
           _buildButtonRack(),
