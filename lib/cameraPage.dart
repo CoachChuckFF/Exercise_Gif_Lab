@@ -87,7 +87,7 @@ class _CameraPageState extends State<CameraPage> {
 
   void _startTimer(){
     _timer = Timer(
-      Duration(seconds: 1),
+      Duration(milliseconds: 500),
       _tickTimer
     );
   }
@@ -108,7 +108,7 @@ class _CameraPageState extends State<CameraPage> {
 
     _recordReadyBloc.add(BoolUpdateEvent(false));
     _controller.startVideoRecording(_currentPath).then((_){
-      _timerBloc.add(IntUpdateEvent(CameraDefines.cameraTime));
+      _timerBloc.add(IntUpdateEvent(CameraDefines.cameraTime * 2));
       _startTimer();
 
     }, onError: (_){
@@ -232,28 +232,33 @@ class _CameraPageState extends State<CameraPage> {
                 return BlocBuilder(
                   cubit: _timerBloc,
                   builder: (context, timeLeft) {
-                    return MaterialButton(
-                      onPressed: () {
-                        if(timeLeft == 0 && recordReady){
-                          _startRecording();
-                        }
-                      },
-                      color: (recordReady) ? CKHColors.main : CKHColors.secondary,
-                      textColor: CKHColors.tertiary,
-                      child: 
-                      (timeLeft > 0) ?
-                        AST(
-                          timeLeft.toString(),
-                          color: CKHColors.tertiary,
-                          isBold: true,
-                          size: 55,
-                        ) :
-                        Icon(
-                          FontAwesomeIcons.recordVinyl,
-                          size: 55,
-                        ),
-                      padding: EdgeInsets.all(16),
-                      shape: CircleBorder(),
+                    return Container(
+                      width: 100,
+                      height: 100,
+                      child: MaterialButton(
+                        elevation: 13,
+                        onPressed: () {
+                          if(timeLeft == 0 && recordReady){
+                            _startRecording();
+                          }
+                        },
+                        color: (recordReady) ? CKHColors.main : CKHColors.secondary,
+                        textColor: CKHColors.tertiary,
+                        child: 
+                        (timeLeft > 0) ?
+                          AST(
+                            (timeLeft ~/ 2).toString(),
+                            color: CKHColors.tertiary,
+                            isBold: true,
+                            size: 60,
+                          ) :
+                          Icon(
+                            FontAwesomeIcons.dotCircle,
+                            size: 60,
+                          ),
+                        padding: EdgeInsets.all(16),
+                        shape: CircleBorder(),
+                      ),
                     );
                   }
                 );
@@ -261,6 +266,52 @@ class _CameraPageState extends State<CameraPage> {
             ),
           ),
         ),
+      ),
+    );
+  }
+
+  _buildMessage(){
+    return Center(
+      child: BlocBuilder(
+        cubit: _timerBloc,
+        builder: (context, time) {
+          int okStartTime = CameraDefines.cameraTime * 2;
+          int okUpTime = CameraDefines.cameraTime;
+          bool showStartMessage = (time >= okStartTime -1);
+          bool showUpMessage = (time <= okUpTime + 1 && time >= okUpTime -1);
+
+          if(showStartMessage)
+            return Container(
+              decoration: BoxDecoration(
+                color: CKHColors.main,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: EdgeInsets.all(13),
+              child: AST(
+                "GO",
+                isBold: true,
+                color: CKHColors.tertiary,
+                size: 55,
+              ),
+            );
+
+          if(showUpMessage)
+            return Container(
+              decoration: BoxDecoration(
+                color: CKHColors.main,
+                borderRadius: BorderRadius.circular(8),
+              ),
+              padding: EdgeInsets.all(13),
+              child: AST(
+                "UP",
+                isBold: true,
+                color: CKHColors.tertiary,
+                size: 55,
+              ),
+            );
+
+          return Container();
+        }
       ),
     );
   }
@@ -279,6 +330,7 @@ class _CameraPageState extends State<CameraPage> {
           _buildCamera(),
           _buildOverlay(),
           _buildButtonRack(),
+          _buildMessage(),
         ]
       )
     );

@@ -15,7 +15,6 @@ export 'package:auto_size_text/auto_size_text.dart';
 export 'package:font_awesome_flutter/font_awesome_flutter.dart';
 
 // Internals
-export 'package:exerciseGifLab/Views/progress_camera.dart';
 export 'package:exerciseGifLab/Views/ast.dart';
 
 
