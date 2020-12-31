@@ -1,0 +1,78 @@
+name: exerciseGifLab
+description: Makin Giferoos
+
+# IOS
+version: 0.0.1+1
+# Android - 
+# version: 2.0.0+1
+
+environment:
+  sdk: ">=2.2.2 <3.0.0"
+
+dependencies:
+  flutter:
+    sdk: flutter
+  
+#Backend Dependancies
+## Camera
+  camera: ^0.5.8
+  path_provider: ^1.6.24
+  path: ^1.7.0
+
+  
+## Helper
+  flutter_launcher_icons: ^0.8.1
+  uuid: ^2.0.4
+
+## State Managemnt
+  flutter_bloc: ^6.1.1
+  bloc: ^6.1.1
+
+
+## Firebase
+  #sometimes you need to run: pod repo update && pod install
+  # firebase_core: ^0.5.3
+  # firebase_analytics: ^6.3.0
+  # firebase_auth: ^0.18.4+1
+  # firebase_storage: ^5.2.0
+  # cloud_firestore: ^0.14.4
+
+  # google_sign_in: ^4.4.2
+  # apple_sign_in: ^0.1.0
+ 
+#Frontend Dependencies
+  auto_size_text: ^2.1.0
+  # screen: ^0.0.5
+
+#Debug Dependancies
+  colorize: ^2.0.0
+
+dev_dependencies:
+  flutter_test:
+    sdk: flutter
+
+dependency_overrides:
+  font_awesome_flutter:
+    path: ./font_awesome_flutter
+
+flutter:
+
+  uses-material-design: true
+
+  assets:
+    - assets/images/
+    - assets/images/logos/
+    - assets/images/icons/
+    - assets/images/exercises/
+    - assets/sounds/
+
+#flutter pub get
+#flutter packages pub run flutter_launcher_icons:main
+
+flutter_icons:
+  ios: true
+  android: true
+  image_path_ios: "assets/images/icons/icon_ios.png"
+  image_path_android: "assets/images/icons/icon_android.png"
+  adaptive_icon_background: "assets/images/icons/background.png"
+  adaptive_icon_foreground: "assets/images/icons/foreground.png"
