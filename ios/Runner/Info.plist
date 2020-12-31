@@ -41,6 +41,9 @@
 	</array>
 	<key>UIViewControllerBasedStatusBarAppearance</key>
 	<false/>
+	
+	<key>NSPhotoLibraryUsageDescription</key>
+	<string>To save the GIFS</string>
 	<key>NSCameraUsageDescription</key>
 	<string>To use the camera</string>
 	<key>NSMicrophoneUsageDescription</key>

@@ -4,6 +4,7 @@ import 'package:exerciseGifLab/Controllers/controllers.dart';
 import 'package:exerciseGifLab/cameraPage.dart';
 
 void main() {
+  WidgetsFlutterBinding.ensureInitialized();
   runApp(ExerciseGifLab());
 }
 
@@ -12,8 +13,8 @@ class ExerciseGifLab extends StatelessWidget {
   Widget build(BuildContext context) {
     return MaterialApp(
       title: 'Exercise Gif Lab',
+      debugShowCheckedModeBanner: false,
       theme: ThemeData(
-        primarySwatch: Colors.purple,
         visualDensity: VisualDensity.adaptivePlatformDensity,
       ),
       home: CameraPage(),

@@ -15,6 +15,7 @@ export 'package:async/async.dart';
 export 'dart:async';
 export 'package:camera/camera.dart';
 export 'package:path_provider/path_provider.dart';
+export 'package:gallery_saver/gallery_saver.dart';
 export 'package:flutter/painting.dart';
 export 'dart:io';
 

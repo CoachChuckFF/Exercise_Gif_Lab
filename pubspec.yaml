@@ -15,7 +15,8 @@ dependencies:
   
 #Backend Dependancies
 ## Camera
-  camera: ^0.5.8
+  camera: ^0.5.8+1
+  gallery_saver: ^2.0.1
   path_provider: ^1.6.24
   path: ^1.7.0
 

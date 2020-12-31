@@ -19,3 +19,13 @@ export 'package:exerciseGifLab/Views/progress_camera.dart';
 export 'package:exerciseGifLab/Views/ast.dart';
 
 
+//Colors
+
+import 'package:flutter/material.dart';
+class CKHColors{
+  static Color main = Color(0xFFFF5C38);
+  static Color secondary = Color(0xFF5E5E5E);
+  static Color tertiary = Color(0xFFFAFAFA);
+}
+
+

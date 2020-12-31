@@ -61,21 +61,21 @@
 //     super.dispose();
 //   }
 
-//   Future<void> _initializeCamera() async {
-//     List<CameraDescription> cameras;
+  // Future<void> _initializeCamera() async {
+  //   List<CameraDescription> cameras;
 
-//     try {
-//       cameras = await availableCameras();
-//       _controller = CameraController(cameras.first, ResolutionPreset.high, enableAudio: false);
-//       await _controller.initialize();
-//       _tempPath = (await getTemporaryDirectory()).path;
-//       _cameraReadyBloc.add(BoolUpdateEvent(true));
-//     } catch (e) {
-//       LOG.log("Could not start camera : ${e.toString()}", FoodFrenzyDebugging.crash);
-//       return;
-//     }
+  //   try {
+  //     cameras = await availableCameras();
+  //     _controller = CameraController(cameras.first, ResolutionPreset.high, enableAudio: false);
+  //     await _controller.initialize();
+  //     _tempPath = (await getTemporaryDirectory()).path;
+  //     _cameraReadyBloc.add(BoolUpdateEvent(true));
+  //   } catch (e) {
+  //     LOG.log("Could not start camera : ${e.toString()}", FoodFrenzyDebugging.crash);
+  //     return;
+  //   }
      
-//   }
+  // }
 
 //   Future<void> _swapCameras() async {
 //     List<CameraDescription> cameras;
@@ -143,170 +143,170 @@
 //     );
 //   }
 
-//   Widget _buildPPPage(){
-//     User _user = _auth.getUser;
+  // Widget _buildPPPage(){
+  //   User _user = _auth.getUser;
 
-//     return UserStateView((userState){
-//       bool hasReference = userState.lastPhotoDate != null;
+  //   return UserStateView((userState){
+  //     bool hasReference = userState.lastPhotoDate != null;
 
-//       return BlocBuilder(
-//         cubit:_cameraReadyBloc,
-//         builder: (context, cameraReady) {
+  //     return BlocBuilder(
+  //       cubit:_cameraReadyBloc,
+  //       builder: (context, cameraReady) {
 
-//           if(!cameraReady){
-//             return Center(
-//               child: Loader(
-//                 size: 55
-//               ),
-//             );
-//           }
+  //         if(!cameraReady){
+  //           return Center(
+  //             child: Loader(
+  //               size: 55
+  //             ),
+  //           );
+  //         }
 
-//           return LayoutBuilder(
-//             builder: (context, constraints) {
-//               double deviceRatio = (constraints.maxWidth / 1.1) / constraints.maxHeight;
+  //         return LayoutBuilder(
+  //           builder: (context, constraints) {
+  //             double deviceRatio = (constraints.maxWidth / 1.1) / constraints.maxHeight;
               
-//               return Center(
-//                 child: Transform.scale(
-//                   scale: _controller.value.aspectRatio / deviceRatio,
-//                   child: Center(
-//                     child: AspectRatio(
-//                       aspectRatio: _controller.value.aspectRatio,
-//                       child: Container(
-//                         decoration: BoxDecoration(
-//                           color: FoodFrenzyColors.jjBlack,
-//                           borderRadius: BorderRadius.circular(8),
-//                           boxShadow: CommonAssets.shadow,
-//                         ),
-//                         child: ClipRRect(
-//                           borderRadius: BorderRadius.circular(8),
-//                           child: Container(
-//                             child: LayoutBuilder(
-//                               builder: (context, frame) {
-//                                 return BlocBuilder(
-//                                   cubit:_cameraStateBloc,
-//                                   builder: (context, state) {
-//                                     return Stack(
-//                                       children: <Widget>[
-//                                         if(state == ProgressCameraDefines.readyState) CameraPreview(_controller),
-//                                         if(state == ProgressCameraDefines.previewState || state == ProgressCameraDefines.savingState) Image.file(File('$_tempPath/FF_${TextHelpers.getTodaysFirebaseDate()}.png')), 
-//                                         if(hasReference && state == ProgressCameraDefines.readyState)
-//                                           Opacity(
-//                                             opacity: 0.34,
-//                                             child: FirebaseDownloader(
-//                                               '${_user.uid}/${TextHelpers.datetimeToFirebaseString(userState.lastPhotoDate)}.png', 
-//                                               FirebaseDownloaderDefines.progress_picture, 
-//                                               placeholder: Image.asset('assets/images/photoOutline.png', width: frame.maxWidth),
-//                                             ),
-//                                           ),
-//                                         if(!hasReference && state == ProgressCameraDefines.readyState)
-//                                           Opacity(
-//                                             opacity: 0.55,
-//                                             child: Image.asset('assets/images/photoOutline.png', width: frame.maxWidth),
-//                                           ),
-//                                         if(state == ProgressCameraDefines.readyState)
-//                                           Positioned(
-//                                             left: (frame.maxWidth / 2) - (34/2),
-//                                             bottom: 13,
-//                                             child: IconButton(
-//                                               icon: Icon(
-//                                                 FontAwesomeIcons.cameraAlt,
-//                                                 color: FoodFrenzyColors.tertiary,
-//                                                 size: 34,
-//                                               ), 
-//                                               onPressed: () async{
-//                                                 String picPath = '$_tempPath/FF_${TextHelpers.getTodaysFirebaseDate()}.png';
-//                                                 File pic = File(picPath);
+  //             return Center(
+  //               child: Transform.scale(
+  //                 scale: _controller.value.aspectRatio / deviceRatio,
+  //                 child: Center(
+  //                   child: AspectRatio(
+  //                     aspectRatio: _controller.value.aspectRatio,
+  //                     child: Container(
+  //                       decoration: BoxDecoration(
+  //                         color: FoodFrenzyColors.jjBlack,
+  //                         borderRadius: BorderRadius.circular(8),
+  //                         boxShadow: CommonAssets.shadow,
+  //                       ),
+  //                       child: ClipRRect(
+  //                         borderRadius: BorderRadius.circular(8),
+  //                         child: Container(
+  //                           child: LayoutBuilder(
+  //                             builder: (context, frame) {
+  //                               return BlocBuilder(
+  //                                 cubit:_cameraStateBloc,
+  //                                 builder: (context, state) {
+  //                                   return Stack(
+  //                                     children: <Widget>[
+  //                                       if(state == ProgressCameraDefines.readyState) CameraPreview(_controller),
+  //                                       if(state == ProgressCameraDefines.previewState || state == ProgressCameraDefines.savingState) Image.file(File('$_tempPath/FF_${TextHelpers.getTodaysFirebaseDate()}.png')), 
+  //                                       if(hasReference && state == ProgressCameraDefines.readyState)
+  //                                         Opacity(
+  //                                           opacity: 0.34,
+  //                                           child: FirebaseDownloader(
+  //                                             '${_user.uid}/${TextHelpers.datetimeToFirebaseString(userState.lastPhotoDate)}.png', 
+  //                                             FirebaseDownloaderDefines.progress_picture, 
+  //                                             placeholder: Image.asset('assets/images/photoOutline.png', width: frame.maxWidth),
+  //                                           ),
+  //                                         ),
+  //                                       if(!hasReference && state == ProgressCameraDefines.readyState)
+  //                                         Opacity(
+  //                                           opacity: 0.55,
+  //                                           child: Image.asset('assets/images/photoOutline.png', width: frame.maxWidth),
+  //                                         ),
+  //                                       if(state == ProgressCameraDefines.readyState)
+  //                                         Positioned(
+  //                                           left: (frame.maxWidth / 2) - (34/2),
+  //                                           bottom: 13,
+  //                                           child: IconButton(
+  //                                             icon: Icon(
+  //                                               FontAwesomeIcons.cameraAlt,
+  //                                               color: FoodFrenzyColors.tertiary,
+  //                                               size: 34,
+  //                                             ), 
+  //                                             onPressed: () async{
+  //                                               String picPath = '$_tempPath/FF_${TextHelpers.getTodaysFirebaseDate()}.png';
+  //                                               File pic = File(picPath);
                               
-//                                                 if(pic.existsSync()){
-//                                                   imageCache.clear();
-//                                                   pic.deleteSync(recursive: true);
-//                                                 }
+  //                                               if(pic.existsSync()){
+  //                                                 imageCache.clear();
+  //                                                 pic.deleteSync(recursive: true);
+  //                                               }
 
-//                                                 await _controller.takePicture(picPath);
+  //                                               await _controller.takePicture(picPath);
 
-//                                                 _cameraStateBloc.add(IntUpdateEvent(ProgressCameraDefines.previewState));
-//                                               },
-//                                             ),
-//                                           ),
-//                                         if(state == ProgressCameraDefines.readyState)
-//                                           Positioned(
-//                                             left: 5,
-//                                             bottom: 13,
-//                                             child: IconButton(
-//                                               icon: Icon(
-//                                                 FontAwesomeIcons.sync,
-//                                                 color: FoodFrenzyColors.tertiary,
-//                                                 size: 34,
-//                                               ), 
-//                                               onPressed: () {
-//                                                 _swapCameras();
-//                                               },
-//                                             ),
-//                                           ),
-//                                         if(state == ProgressCameraDefines.previewState)
-//                                           Positioned(
-//                                             left: (frame.maxWidth / 2) - (34/2),
-//                                             bottom: 13,
-//                                             child: IconButton(
-//                                               icon: Icon(
-//                                                 FontAwesomeIcons.trash,
-//                                                 color: FoodFrenzyColors.tertiary,
-//                                                 size: 34,
-//                                               ), 
-//                                               onPressed: (){
-//                                                 _cameraStateBloc.add(IntUpdateEvent(ProgressCameraDefines.readyState));
-//                                               },
-//                                             ),
-//                                           ),
-//                                         if(state == ProgressCameraDefines.savingState)
-//                                           Positioned(
-//                                             left: 0,
-//                                             bottom: 0,
-//                                             child: Container(
-//                                               width: frame.maxWidth,
-//                                               height: 21,
-//                                               child: FirebaseUploader(
-//                                                 file: File('$_tempPath/FF_${TextHelpers.getTodaysFirebaseDate()}.png'),
-//                                                 onDone: (path) {
-//                                                   UserState.firebase.getDocument().then((state){
-//                                                     state.updateLastPhotoDate();
-//                                                   });
-//                                                   UserLog.getTodaysLog().then((log) async{
-//                                                     if(log.photoURL == null){
-//                                                       await UserPoints.updatePhotoURL(path);
-//                                                       await UserLog.updateTodaysPhotoURL(path).then((_) async{
-//                                                         //Update points only after log
-//                                                         await UserPoints.handlePoints(log, UserPoints.lpIndex);
-//                                                       });
-//                                                     }
-//                                                   });
-//                                                   widget.onExit();
-//                                                 }
-//                                               ),
-//                                             ),
-//                                           ),
-//                                         // if(state == ProgressCameraDefines.readyState) Cover(color: FoodFrenzyColors.jjBlack),
-//                                       ],
-//                                     );
-//                                   }
-//                                 );
-//                               }
-//                             ),
-//                           ),
-//                         ),
-//                       ), 
-//                     ),
-//                   )
-//                 ),
-//               );
-//             }
-//           );
-//         }
-//       );
-//     }, onLoading: (){
-//       return CommonAssets.buildLoader();
-//     },);
-//   }
+  //                                               _cameraStateBloc.add(IntUpdateEvent(ProgressCameraDefines.previewState));
+  //                                             },
+  //                                           ),
+  //                                         ),
+  //                                       if(state == ProgressCameraDefines.readyState)
+  //                                         Positioned(
+  //                                           left: 5,
+  //                                           bottom: 13,
+  //                                           child: IconButton(
+  //                                             icon: Icon(
+  //                                               FontAwesomeIcons.sync,
+  //                                               color: FoodFrenzyColors.tertiary,
+  //                                               size: 34,
+  //                                             ), 
+  //                                             onPressed: () {
+  //                                               _swapCameras();
+  //                                             },
+  //                                           ),
+  //                                         ),
+  //                                       if(state == ProgressCameraDefines.previewState)
+  //                                         Positioned(
+  //                                           left: (frame.maxWidth / 2) - (34/2),
+  //                                           bottom: 13,
+  //                                           child: IconButton(
+  //                                             icon: Icon(
+  //                                               FontAwesomeIcons.trash,
+  //                                               color: FoodFrenzyColors.tertiary,
+  //                                               size: 34,
+  //                                             ), 
+  //                                             onPressed: (){
+  //                                               _cameraStateBloc.add(IntUpdateEvent(ProgressCameraDefines.readyState));
+  //                                             },
+  //                                           ),
+  //                                         ),
+  //                                       if(state == ProgressCameraDefines.savingState)
+  //                                         Positioned(
+  //                                           left: 0,
+  //                                           bottom: 0,
+  //                                           child: Container(
+  //                                             width: frame.maxWidth,
+  //                                             height: 21,
+  //                                             child: FirebaseUploader(
+  //                                               file: File('$_tempPath/FF_${TextHelpers.getTodaysFirebaseDate()}.png'),
+  //                                               onDone: (path) {
+  //                                                 UserState.firebase.getDocument().then((state){
+  //                                                   state.updateLastPhotoDate();
+  //                                                 });
+  //                                                 UserLog.getTodaysLog().then((log) async{
+  //                                                   if(log.photoURL == null){
+  //                                                     await UserPoints.updatePhotoURL(path);
+  //                                                     await UserLog.updateTodaysPhotoURL(path).then((_) async{
+  //                                                       //Update points only after log
+  //                                                       await UserPoints.handlePoints(log, UserPoints.lpIndex);
+  //                                                     });
+  //                                                   }
+  //                                                 });
+  //                                                 widget.onExit();
+  //                                               }
+  //                                             ),
+  //                                           ),
+  //                                         ),
+  //                                       // if(state == ProgressCameraDefines.readyState) Cover(color: FoodFrenzyColors.jjBlack),
+  //                                     ],
+  //                                   );
+  //                                 }
+  //                               );
+  //                             }
+  //                           ),
+  //                         ),
+  //                       ),
+  //                     ), 
+  //                   ),
+  //                 )
+  //               ),
+  //             );
+  //           }
+  //         );
+  //       }
+  //     );
+  //   }, onLoading: (){
+  //     return CommonAssets.buildLoader();
+  //   },);
+  // }
 
 //   @override
 //   Widget build(BuildContext context) {
